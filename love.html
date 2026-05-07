@@ -1,0 +1,1982 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MR COIN — Fast & Secure USDT to Naira Exchange in Nigeria</title>
+  <meta name="description"
+    content="Nigeria's #1 trusted USDT to Naira exchange. Best rates, instant payouts under 5 minutes, 10,000+ happy customers since 2020." />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Poppins:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet" />
+  <style>
+    :root {
+      --brand: #3b82f6;
+      --brand-2: #60a5fa;
+      --brand-dim: rgba(59, 130, 246, .1);
+      --ink: #0f172a;
+      --ink-2: #334155;
+      --muted: #64748b;
+      --surface: #ffffff;
+      --surface-2: #f8fafc;
+      --surface-3: #eef2f7;
+      --line: #e5e7eb;
+      --green: #16a34a;
+      --grad: linear-gradient(135deg, #3b82f6, #60a5fa);
+      --shadow-elegant: 0 20px 60px -20px rgba(59, 130, 246, .3);
+      --shadow-soft: 0 2px 20px rgba(15, 23, 42, .06);
+    }
+
+    * {
+      box-sizing: border-box
+    }
+
+    html {
+      scroll-behavior: smooth
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      color: var(--ink);
+      background: var(--surface);
+      overflow-x: hidden
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    .display-1,
+    .display-2,
+    .display-3,
+    .display-4,
+    .display-5 {
+      font-family: 'Poppins', sans-serif;
+      font-weight: 800;
+      letter-spacing: -.02em
+    }
+
+    .text-brand {
+      color: var(--brand) !important
+    }
+
+    .bg-brand {
+      background: var(--brand) !important
+    }
+
+    .bg-surface-2 {
+      background: var(--surface-2)
+    }
+
+    .bg-surface-3 {
+      background: var(--surface-3)
+    }
+
+    .text-muted-2 {
+      color: var(--muted)
+    }
+
+    .text-grad {
+      background: var(--grad);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      color: transparent
+    }
+
+    .section {
+      padding: 100px 0
+    }
+
+    @media(max-width:768px) {
+      .section {
+        padding: 60px 0
+      }
+    }
+
+    .section-tag {
+      display: inline-block;
+      background: var(--brand-dim);
+      color: var(--brand);
+      font-size: .75rem;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      padding: 6px 14px;
+      border-radius: 100px;
+      margin-bottom: 14px
+    }
+
+    .section-title {
+      font-size: clamp(2rem, 4vw, 3rem);
+      line-height: 1.15;
+      margin-bottom: 14px
+    }
+
+    .section-sub {
+      color: var(--muted);
+      font-size: 1.05rem;
+      max-width: 580px
+    }
+
+    /* Loader */
+    #loader {
+      position: fixed;
+      inset: 0;
+      background: #fff;
+      z-index: 9999;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: opacity .5s
+    }
+
+    #loader.hidden {
+      opacity: 0;
+      pointer-events: none
+    }
+
+    .loader-logo {
+      font-family: 'Poppins';
+      font-size: 2.5rem;
+      font-weight: 800;
+      color: var(--brand);
+      letter-spacing: 3px;
+      animation: pulse 1s ease-in-out infinite
+    }
+
+    @keyframes pulse {
+
+      0%,
+      100% {
+        opacity: 1
+      }
+
+      50% {
+        opacity: .4
+      }
+    }
+
+    /* Navbar */
+    .navbar {
+      position: fixed;
+      top: 18px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 1000;
+      width: calc(100% - 32px);
+      max-width: 1140px;
+      background: rgba(255, 255, 255, .96);
+      backdrop-filter: blur(18px);
+      border: 1px solid var(--line);
+      border-radius: 100px;
+      padding: 12px 22px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      transition: all .3s;
+      box-shadow: 0 4px 24px rgba(15, 23, 42, .06)
+    }
+
+    .navbar.scrolled {
+      box-shadow: 0 8px 40px rgba(15, 23, 42, .1)
+    }
+
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+      font-weight: 800
+    }
+
+    .nav-logo-mark {
+      width: 36px;
+      height: 36px;
+      background: var(--grad);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      font-weight: 800;
+      font-family: 'Poppins'
+    }
+
+    .nav-logo-text {
+      font-family: 'Poppins';
+      font-size: 1.3rem;
+      color: var(--brand);
+      letter-spacing: 1px
+    }
+
+    .nav-logo-text span {
+      color: var(--ink)
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 4px;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      align-items: center
+    }
+
+    .nav-links a {
+      color: var(--ink-2);
+      text-decoration: none;
+      font-size: .88rem;
+      font-weight: 500;
+      padding: 8px 14px;
+      border-radius: 100px;
+      transition: .25s
+    }
+
+    .nav-links a:hover {
+      color: var(--ink);
+      background: var(--surface-3)
+    }
+
+    .nav-cta {
+      background: var(--grad) !important;
+      color: #fff !important;
+      font-weight: 700 !important;
+      padding: 9px 20px !important
+    }
+
+    .nav-toggle {
+      display: none;
+      background: none;
+      border: 0;
+      font-size: 1.3rem;
+      color: var(--ink)
+    }
+
+    @media(max-width:900px) {
+      .nav-links {
+        display: none;
+        position: absolute;
+        top: 64px;
+        left: 0;
+        right: 0;
+        flex-direction: column;
+        background: #fff;
+        border: 1px solid var(--line);
+        border-radius: 20px;
+        padding: 14px;
+        box-shadow: 0 20px 60px rgba(15, 23, 42, .1);
+        align-items: stretch
+      }
+
+      .nav-links.open {
+        display: flex
+      }
+
+      .nav-links a {
+        text-align: center
+      }
+
+      .nav-toggle {
+        display: block
+      }
+    }
+
+    /* Hero */
+    .hero {
+      min-height: 100vh;
+      padding: 140px 0 80px;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      background: linear-gradient(180deg, #fff, #f8fafc)
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 80% 60% at 50% -10%, rgba(59, 130, 246, .12), transparent 70%);
+      pointer-events: none
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image: linear-gradient(rgba(59, 130, 246, .05) 1px, transparent 1px), linear-gradient(90deg, rgba(59, 130, 246, .05) 1px, transparent 1px);
+      background-size: 60px 60px;
+      mask-image: radial-gradient(ellipse 70% 60% at 50% 30%, black 40%, transparent 80%);
+      pointer-events: none
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--brand-dim);
+      border: 1px solid rgba(59, 130, 246, .25);
+      color: var(--brand);
+      font-weight: 600;
+      font-size: .82rem;
+      padding: 6px 16px;
+      border-radius: 100px;
+      margin-bottom: 22px
+    }
+
+    .hero-badge .dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--brand);
+      animation: blink 1.5s infinite
+    }
+
+    .hero h1 {
+      font-size: clamp(2.4rem, 5.5vw, 4.2rem);
+      line-height: 1.05;
+      margin-bottom: 20px
+    }
+
+    .hero p.lead {
+      color: var(--muted);
+      font-size: 1.1rem;
+      max-width: 500px;
+      margin-bottom: 30px
+    }
+
+    .btn-brand {
+      background: var(--grad);
+      color: #fff;
+      border: 0;
+      padding: 14px 28px;
+      border-radius: 100px;
+      font-weight: 700;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: .3s;
+      text-decoration: none
+    }
+
+    .btn-brand:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-elegant);
+      color: #fff
+    }
+
+    .btn-ghost {
+      background: transparent;
+      color: var(--ink);
+      border: 1.5px solid var(--line);
+      padding: 13px 26px;
+      border-radius: 100px;
+      font-weight: 700;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      text-decoration: none;
+      transition: .3s
+    }
+
+    .btn-ghost:hover {
+      border-color: var(--brand);
+      color: var(--brand)
+    }
+
+    .trust-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 100px;
+      padding: 6px 12px;
+      font-size: .78rem;
+      color: var(--ink-2);
+      margin: 4px 4px 0 0
+    }
+
+    .trust-pill i {
+      color: var(--brand)
+    }
+
+    /* Rate widget */
+    .rate-widget {
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 24px;
+      padding: 28px;
+      box-shadow: var(--shadow-soft);
+      position: relative;
+      overflow: hidden
+    }
+
+    .rate-widget::before {
+      content: "";
+      position: absolute;
+      top: -60px;
+      right: -60px;
+      width: 200px;
+      height: 200px;
+      background: radial-gradient(circle, rgba(59, 130, 246, .12), transparent 70%);
+      border-radius: 50%
+    }
+
+    .rate-label {
+      font-size: .78rem;
+      color: var(--muted);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: .5px
+    }
+
+    .rate-live {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      color: var(--green);
+      font-size: .8rem;
+      font-weight: 600
+    }
+
+    .rate-live .dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--green);
+      animation: blink 1.5s infinite
+    }
+
+    .rate-big {
+      font-family: 'Poppins';
+      font-size: 2.8rem;
+      font-weight: 800;
+      color: var(--brand);
+      margin-bottom: 4px
+    }
+
+    .rate-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 11px 0;
+      border-top: 1px solid var(--line);
+      font-size: .88rem
+    }
+
+    .rate-row span:first-child {
+      color: var(--muted)
+    }
+
+    .rate-row span:last-child {
+      font-weight: 600
+    }
+
+    /* Ticker */
+    .ticker {
+      background: var(--surface-2);
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+      padding: 16px 0;
+      overflow: hidden
+    }
+
+    .ticker-inner {
+      display: flex;
+      gap: 60px;
+      animation: ticker 30s linear infinite;
+      width: max-content
+    }
+
+    @keyframes ticker {
+      0% {
+        transform: translateX(0)
+      }
+
+      100% {
+        transform: translateX(-50%)
+      }
+    }
+
+    .ticker-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      white-space: nowrap;
+      font-size: .88rem
+    }
+
+    .ticker-item .label {
+      color: var(--muted)
+    }
+
+    .ticker-item .value {
+      font-weight: 700
+    }
+
+    .ticker-item .change {
+      color: var(--green);
+      font-size: .82rem
+    }
+
+    /* Cards */
+    .card-soft {
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      padding: 28px;
+      box-shadow: var(--shadow-soft);
+      height: 100%;
+      transition: .3s
+    }
+
+    .card-soft:hover {
+      border-color: var(--brand);
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-elegant)
+    }
+
+    .icon-box {
+      width: 52px;
+      height: 52px;
+      border-radius: 14px;
+      background: var(--brand-dim);
+      color: var(--brand);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.4rem;
+      margin-bottom: 18px
+    }
+
+    .pill {
+      display: inline-block;
+      background: var(--brand-dim);
+      color: var(--brand);
+      font-size: .72rem;
+      font-weight: 700;
+      padding: 4px 10px;
+      border-radius: 100px;
+      margin-top: 12px;
+      text-transform: uppercase;
+      letter-spacing: .5px
+    }
+
+    /* About */
+    .about-visual {
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 28px;
+      padding: 30px;
+      text-align: center;
+      box-shadow: var(--shadow-soft);
+      position: relative;
+      overflow: hidden
+    }
+
+    .img-placeholder {
+      width: 100%;
+      aspect-ratio: 4/3;
+      background: linear-gradient(135deg, var(--surface-3), var(--brand-dim));
+      border-radius: 16px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      border: 2px dashed var(--line);
+      color: var(--muted);
+      font-size: .85rem;
+      gap: 8px;
+      margin-bottom: 18px
+    }
+
+    .img-placeholder i {
+      font-size: 2rem;
+      color: var(--brand)
+    }
+
+    .stat-num {
+      font-family: 'Poppins';
+      font-size: 2.6rem;
+      font-weight: 800;
+      color: var(--brand);
+      line-height: 1
+    }
+
+    .point {
+      display: flex;
+      gap: 14px;
+      margin-bottom: 22px
+    }
+
+    .point-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      background: var(--brand-dim);
+      color: var(--brand);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0
+    }
+
+    .point h4 {
+      font-size: 1rem;
+      margin-bottom: 4px
+    }
+
+    .point p {
+      font-size: .88rem;
+      color: var(--muted);
+      margin: 0
+    }
+
+    .mini-stat {
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 18px;
+      text-align: center
+    }
+
+    .mini-stat .n {
+      font-family: 'Poppins';
+      font-size: 1.6rem;
+      font-weight: 800;
+      color: var(--brand)
+    }
+
+    .mini-stat .l {
+      font-size: .76rem;
+      color: var(--muted);
+      margin-top: 2px
+    }
+
+    /* Calculator */
+    .calc-card {
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 24px;
+      padding: 34px;
+      box-shadow: var(--shadow-soft)
+    }
+
+    .calc-input-wrap {
+      position: relative;
+      margin-bottom: 18px
+    }
+
+    .calc-currency {
+      position: absolute;
+      left: 16px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-weight: 700;
+      color: var(--brand)
+    }
+
+    .calc-input {
+      width: 100%;
+      background: var(--surface-2);
+      border: 1.5px solid var(--line);
+      border-radius: 12px;
+      padding: 14px 16px 14px 50px;
+      font-weight: 600;
+      font-size: 1.1rem;
+      outline: none;
+      transition: .2s;
+      font-family: 'Inter'
+    }
+
+    .calc-input:focus {
+      border-color: var(--brand);
+      background: #fff
+    }
+
+    .calc-arrow {
+      text-align: center;
+      margin-bottom: 14px;
+      color: var(--brand);
+      font-size: 1.4rem
+    }
+
+    .calc-result {
+      background: var(--brand-dim);
+      border: 1.5px solid rgba(59, 130, 246, .25);
+      border-radius: 12px;
+      padding: 14px 16px;
+      font-family: 'Poppins';
+      font-weight: 800;
+      font-size: 1.5rem;
+      color: var(--brand)
+    }
+
+    .calc-info {
+      display: flex;
+      gap: 10px;
+      margin-top: 14px;
+      flex-wrap: wrap
+    }
+
+    .calc-info-item {
+      flex: 1;
+      min-width: 90px;
+      background: var(--surface-2);
+      border-radius: 10px;
+      padding: 10px 12px;
+      font-size: .78rem
+    }
+
+    .calc-info-item span {
+      display: block;
+      color: var(--muted);
+      margin-bottom: 2px
+    }
+
+    .calc-info-item strong {
+      font-weight: 700
+    }
+
+    .feat-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      padding: 18px 0;
+      border-bottom: 1px solid var(--line)
+    }
+
+    .feat-row:last-child {
+      border-bottom: 0
+    }
+
+    .feat-row>i {
+      color: var(--brand);
+      font-size: 1.2rem;
+      width: 24px;
+      text-align: center;
+      margin-top: 3px
+    }
+
+    .feat-row h4 {
+      font-size: .98rem;
+      margin-bottom: 3px
+    }
+
+    .feat-row p {
+      font-size: .85rem;
+      color: var(--muted);
+      margin: 0
+    }
+
+    /* Steps */
+    .steps {
+      position: relative
+    }
+
+    .steps::before {
+      content: "";
+      position: absolute;
+      top: 36px;
+      left: 8%;
+      right: 8%;
+      height: 2px;
+      background: linear-gradient(90deg, var(--brand), transparent);
+      pointer-events: none
+    }
+
+    @media(max-width:900px) {
+      .steps::before {
+        display: none
+      }
+    }
+
+    .step {
+      text-align: center;
+      padding: 0 16px
+    }
+
+    .step-num {
+      width: 72px;
+      height: 72px;
+      background: #fff;
+      border: 2px solid var(--brand);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Poppins';
+      font-weight: 800;
+      font-size: 1.4rem;
+      color: var(--brand);
+      margin: 0 auto 18px;
+      position: relative;
+      z-index: 1;
+      box-shadow: 0 8px 20px rgba(59, 130, 246, .15)
+    }
+
+    .step h3 {
+      font-size: 1.05rem;
+      margin-bottom: 8px
+    }
+
+    .step p {
+      font-size: .86rem;
+      color: var(--muted)
+    }
+
+    /* Testimonials */
+    .testi-card {
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      padding: 26px;
+      height: 100%;
+      box-shadow: var(--shadow-soft)
+    }
+
+    .stars {
+      color: var(--brand);
+      font-size: .9rem;
+      margin-bottom: 12px
+    }
+
+    .testi-card p {
+      font-size: .9rem;
+      color: var(--ink-2);
+      font-style: italic;
+      margin-bottom: 18px;
+      line-height: 1.65
+    }
+
+    .testi-author {
+      display: flex;
+      align-items: center;
+      gap: 12px
+    }
+
+    .testi-avatar {
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      background: var(--brand-dim);
+      color: var(--brand);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-family: 'Poppins'
+    }
+
+    .testi-name {
+      font-weight: 700;
+      font-size: .9rem
+    }
+
+    .testi-meta {
+      font-size: .76rem;
+      color: var(--muted)
+    }
+
+    .verified {
+      color: var(--green);
+      font-size: .74rem;
+      font-weight: 600;
+      margin-top: 2px
+    }
+
+    /* Security */
+    .sec-item {
+      display: flex;
+      gap: 14px;
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 18px;
+      margin-bottom: 12px;
+      transition: .3s
+    }
+
+    .sec-item:hover {
+      border-color: var(--brand)
+    }
+
+    .sec-item-icon {
+      width: 46px;
+      height: 46px;
+      border-radius: 12px;
+      background: var(--brand-dim);
+      color: var(--brand);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0
+    }
+
+    .sec-visual {
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 28px;
+      padding: 36px;
+      text-align: center;
+      box-shadow: var(--shadow-soft)
+    }
+
+    .shield {
+      font-size: 4.5rem;
+      color: var(--brand);
+      margin-bottom: 14px
+    }
+
+    .sec-badge {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: rgba(22, 163, 74, .07);
+      border: 1px solid rgba(22, 163, 74, .2);
+      border-radius: 10px;
+      padding: 10px 14px;
+      font-size: .84rem;
+      color: var(--ink-2);
+      margin-bottom: 8px;
+      text-align: left
+    }
+
+    .sec-badge i {
+      color: var(--green)
+    }
+
+    /* Contact */
+    .contact-card {
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      padding: 28px;
+      box-shadow: var(--shadow-soft);
+      height: 100%
+    }
+
+    .contact-card h3 {
+      font-size: 1.05rem;
+      margin-bottom: 8px
+    }
+
+    .contact-card p {
+      font-size: .88rem;
+      color: var(--muted);
+      margin-bottom: 18px
+    }
+
+    .btn-wa {
+      background: #25D366;
+      color: #fff;
+      border: 0;
+      padding: 13px 18px;
+      border-radius: 12px;
+      font-weight: 700;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      width: 100%;
+      transition: .3s
+    }
+
+    .btn-wa:hover {
+      background: #128C7E;
+      color: #fff
+    }
+
+    .btn-tg {
+      background: #0088cc;
+      color: #fff;
+      border: 0;
+      padding: 13px 18px;
+      border-radius: 12px;
+      font-weight: 700;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      width: 100%;
+      transition: .3s
+    }
+
+    .btn-tg:hover {
+      background: #006da8;
+      color: #fff
+    }
+
+    .btn-em {
+      background: var(--brand-dim);
+      color: var(--brand);
+      border: 1.5px solid rgba(59, 130, 246, .25);
+      padding: 13px 18px;
+      border-radius: 12px;
+      font-weight: 700;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      width: 100%;
+      transition: .3s
+    }
+
+    .btn-em:hover {
+      background: var(--brand);
+      color: #fff
+    }
+
+    /* FAQ */
+    .faq-item {
+      border-bottom: 1px solid var(--line)
+    }
+
+    .faq-q {
+      width: 100%;
+      background: none;
+      border: 0;
+      text-align: left;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      padding: 20px 0;
+      font-weight: 700;
+      color: var(--ink);
+      font-size: .98rem
+    }
+
+    .faq-q i {
+      color: var(--brand);
+      transition: .3s;
+      flex-shrink: 0
+    }
+
+    .faq-q.open i {
+      transform: rotate(45deg)
+    }
+
+    .faq-a {
+      display: none;
+      padding: 0 0 18px;
+      font-size: .9rem;
+      color: var(--muted);
+      line-height: 1.7
+    }
+
+    .faq-a.open {
+      display: block
+    }
+
+    /* CTA */
+    .cta-banner {
+      background: linear-gradient(135deg, rgba(59, 130, 246, .1), rgba(96, 165, 250, .04));
+      border: 1px solid rgba(59, 130, 246, .25);
+      border-radius: 28px;
+      padding: 60px 36px;
+      text-align: center;
+      position: relative;
+      overflow: hidden
+    }
+
+    .cta-banner h2 {
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      margin-bottom: 14px
+    }
+
+    .cta-banner p {
+      color: var(--muted);
+      font-size: 1.05rem;
+      margin-bottom: 28px
+    }
+
+    /* Footer */
+    footer {
+      background: #fff;
+      border-top: 1px solid var(--line);
+      padding: 60px 0 28px
+    }
+
+    .footer-logo {
+      font-family: 'Poppins';
+      font-weight: 800;
+      font-size: 1.4rem;
+      color: var(--brand);
+      margin-bottom: 12px
+    }
+
+    .footer-logo span {
+      color: var(--ink)
+    }
+
+    .footer-desc {
+      color: var(--muted);
+      font-size: .88rem;
+      margin-bottom: 18px
+    }
+
+    .footer-soc {
+      width: 38px;
+      height: 38px;
+      background: var(--surface-3);
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--muted);
+      text-decoration: none;
+      margin-right: 6px;
+      transition: .3s
+    }
+
+    .footer-soc:hover {
+      border-color: var(--brand);
+      color: var(--brand)
+    }
+
+    .footer-col h4 {
+      font-size: .9rem;
+      margin-bottom: 14px;
+      font-weight: 700
+    }
+
+    .footer-col ul {
+      list-style: none;
+      padding: 0
+    }
+
+    .footer-col li {
+      margin-bottom: 8px
+    }
+
+    .footer-col a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: .86rem
+    }
+
+    .footer-col a:hover {
+      color: var(--brand)
+    }
+
+    .footer-bottom {
+      padding-top: 22px;
+      border-top: 1px solid var(--line);
+      margin-top: 30px;
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+      font-size: .82rem;
+      color: var(--muted)
+    }
+
+    .footer-bottom a {
+      color: var(--muted);
+      text-decoration: none;
+      margin-left: 18px
+    }
+
+    .footer-bottom a:hover {
+      color: var(--brand)
+    }
+
+    /* WA float */
+    .wa-float {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      z-index: 998;
+      width: 58px;
+      height: 58px;
+      background: #25D366;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      font-size: 1.6rem;
+      box-shadow: 0 8px 30px rgba(37, 211, 102, .45);
+      text-decoration: none;
+      transition: .3s
+    }
+
+    .wa-float:hover {
+      transform: scale(1.1);
+      color: #fff
+    }
+
+    /* Fade in */
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity .8s ease, transform .8s ease
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: none
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- LOADER -->
+  <div id="loader">
+    <div class="loader-logo">MR COIN</div>
+  </div>
+
+  <!-- WHATSAPP FLOAT -->
+  <a href="https://wa.me/2348000000000" class="wa-float" target="_blank" rel="noopener" aria-label="WhatsApp"><i
+      class="fab fa-whatsapp"></i></a>
+
+  <!-- NAVBAR -->
+  <nav class="navbar" id="navbar">
+    <a href="#home" class="nav-logo">
+      <div class="nav-logo-mark">M</div>
+      <span class="nav-logo-text">MR<span>COIN</span></span>
+    </a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#about">About</a></li>
+      <li><a href="#services">Services</a></li>
+      <li><a href="#calculator">Rates</a></li>
+      <li><a href="#how">How It Works</a></li>
+      <li><a href="#testimonials">Reviews</a></li>
+      <li><a href="#faq">FAQ</a></li>
+      <li><a href="#contact" class="nav-cta">Start Trade</a></li>
+    </ul>
+    <button class="nav-toggle" id="navToggle" aria-label="Menu"><i class="fas fa-bars"></i></button>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero" id="home">
+    <div class="container position-relative">
+      <div class="row align-items-center g-5">
+        <div class="col-lg-6 reveal">
+          <div class="hero-badge"><span class="dot"></span> Nigeria's #1 Trusted USDT Exchange</div>
+          <h1>Fast & Secure <span class="text-grad">USDT to Naira</span> Exchange</h1>
+          <p class="lead">Get the best rates, instant payments, and zero stress. We've been converting USDT to Naira for
+            thousands of Nigerians since 2020.</p>
+          <div class="d-flex flex-wrap gap-2">
+            <a href="#calculator" class="btn-brand"><i class="fas fa-bolt"></i> Start Transaction</a>
+            <a href="#calculator" class="btn-ghost"><i class="fas fa-chart-line"></i> Get Rate</a>
+          </div>
+          <div class="mt-4">
+            <span class="trust-pill"><i class="fas fa-shield-alt"></i> 100% Secure</span>
+            <span class="trust-pill"><i class="fas fa-clock"></i> 5-Min Payments</span>
+            <span class="trust-pill"><i class="fas fa-users"></i> 10,000+ Customers</span>
+          </div>
+        </div>
+        <div class="col-lg-6 reveal">
+          <div class="rate-widget">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+              <div class="rate-label">Current USDT Rate</div>
+              <div class="rate-live"><span class="dot"></span> Live Rate</div>
+            </div>
+            <div class="rate-big" id="liveRate">₦1,640</div>
+            <div class="text-muted-2 small mb-3">per 1 USDT — Updated just now</div>
+            <div class="rate-row"><span>Buy Rate</span><span id="buyRate">₦1,635 / USDT</span></div>
+            <div class="rate-row"><span>Sell Rate</span><span class="text-brand" id="sellRate">₦1,640 / USDT</span>
+            </div>
+            <div class="rate-row"><span>Min Transaction</span><span>$20 USDT</span></div>
+            <div class="rate-row"><span>Max Transaction</span><span>$50,000 USDT</span></div>
+            <div class="rate-row"><span>Processing Time</span><span style="color:var(--green)">Under 5 mins</span></div>
+            <a href="#contact" class="btn-brand mt-3 w-100 justify-content-center"><i class="fas fa-arrow-right"></i>
+              Trade Now</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TICKER -->
+  <div class="ticker">
+    <div class="ticker-inner">
+      <div class="ticker-item"><span class="label">USDT/NGN</span><span class="value">₦1,640</span><span
+          class="change">+0.8%</span></div>
+      <div class="ticker-item"><span class="label">BTC/NGN</span><span class="value">₦124,500,000</span><span
+          class="change">+2.1%</span></div>
+      <div class="ticker-item"><span class="label">ETH/NGN</span><span class="value">₦3,820,000</span><span
+          class="change">+1.4%</span></div>
+      <div class="ticker-item"><span class="label">BNB/NGN</span><span class="value">₦820,000</span><span
+          class="change">+0.5%</span></div>
+      <div class="ticker-item"><span class="label">Avg. Payout Time</span><span class="value"
+          style="color:var(--green)">4.2 mins</span></div>
+      <div class="ticker-item"><span class="label">Today's Volume</span><span class="value">₦280M+</span></div>
+      <div class="ticker-item"><span class="label">Total Customers</span><span class="value">10,400+</span></div>
+      <div class="ticker-item"><span class="label">USDT/NGN</span><span class="value">₦1,640</span><span
+          class="change">+0.8%</span></div>
+      <div class="ticker-item"><span class="label">BTC/NGN</span><span class="value">₦124,500,000</span><span
+          class="change">+2.1%</span></div>
+      <div class="ticker-item"><span class="label">ETH/NGN</span><span class="value">₦3,820,000</span><span
+          class="change">+1.4%</span></div>
+      <div class="ticker-item"><span class="label">BNB/NGN</span><span class="value">₦820,000</span><span
+          class="change">+0.5%</span></div>
+      <div class="ticker-item"><span class="label">Avg. Payout Time</span><span class="value"
+          style="color:var(--green)">4.2 mins</span></div>
+      <div class="ticker-item"><span class="label">Today's Volume</span><span class="value">₦280M+</span></div>
+      <div class="ticker-item"><span class="label">Total Customers</span><span class="value">10,400+</span></div>
+    </div>
+  </div>
+
+  <!-- ABOUT -->
+  <section id="about" class="section bg-surface-2">
+    <div class="container">
+      <div class="reveal">
+        <div class="section-tag">About Us</div>
+        <h2 class="section-title">Nigeria's Most <span class="text-grad">Trusted</span><br>Crypto Exchange</h2>
+        <p class="section-sub">Since 2020, MR COIN has been the go-to platform for Nigerians looking to convert USDT and
+          other crypto assets to Naira quickly, safely, and at the best rates.</p>
+      </div>
+
+      <div class="row g-4 mt-4 align-items-center">
+        <div class="col-lg-6 reveal">
+          <div class="about-visual">
+            <div class="img-placeholder"><i class="fas fa-image"></i> About Us Image Placeholder</div>
+            <div class="stat-num">₦18B+</div>
+            <div class="text-muted-2 small mt-1">Total Volume Exchanged</div>
+          </div>
+          <div class="row g-3 mt-3">
+            <div class="col-4">
+              <div class="mini-stat">
+                <div class="n">10K+</div>
+                <div class="l">Happy Customers</div>
+              </div>
+            </div>
+            <div class="col-4">
+              <div class="mini-stat">
+                <div class="n">4.9★</div>
+                <div class="l">Average Rating</div>
+              </div>
+            </div>
+            <div class="col-4">
+              <div class="mini-stat">
+                <div class="n">5yr</div>
+                <div class="l">In Business</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-6 reveal">
+          <div class="point">
+            <div class="point-icon"><i class="fas fa-bullseye"></i></div>
+            <div>
+              <h4>Our Mission</h4>
+              <p>To make crypto-to-Naira exchange fast, transparent, and accessible to every Nigerian — from first-time
+                traders to seasoned crypto veterans.</p>
+            </div>
+          </div>
+          <div class="point">
+            <div class="point-icon"><i class="fas fa-handshake"></i></div>
+            <div>
+              <h4>Built on Trust</h4>
+              <p>Every transaction is handled manually by our experienced traders. We don't just process payments — we
+                build lasting relationships with our customers.</p>
+            </div>
+          </div>
+          <div class="point">
+            <div class="point-icon"><i class="fas fa-bolt"></i></div>
+            <div>
+              <h4>Speed is Our Promise</h4>
+              <p>Average payout time is under 5 minutes. We understand that in crypto, time is money — so we never make
+                you wait unnecessarily.</p>
+            </div>
+          </div>
+          <div class="point">
+            <div class="point-icon"><i class="fas fa-chart-bar"></i></div>
+            <div>
+              <h4>Competitive Rates, Always</h4>
+              <p>We monitor the market 24/7 to offer rates that beat most exchanges. Our lean operations mean more value
+                lands in your pocket.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICES -->
+  <section id="services" class="section">
+    <div class="container">
+      <div class="text-center reveal">
+        <div class="section-tag">Services</div>
+        <h2 class="section-title">Everything You Need in<br>One <span class="text-grad">Trusted</span> Platform</h2>
+        <p class="section-sub mx-auto">From simple USDT swaps to bulk VIP trades — we handle it all with speed and
+          precision.</p>
+      </div>
+      <div class="row g-4 mt-4">
+        <div class="col-md-6 col-lg-4 reveal">
+          <div class="card-soft">
+            <div class="img-placeholder" style="aspect-ratio:16/9"><i class="fas fa-image"></i> Service Image</div>
+            <div class="icon-box"><i class="fas fa-exchange-alt"></i></div>
+            <h3 class="h5">USDT → Naira</h3>
+            <p class="text-muted-2 small mb-0">Our flagship service. Send USDT on TRC20 or ERC20 network, receive Naira
+              directly in your bank account. Fast, reliable, and at market-beating rates.</p><span class="pill">Most
+              Popular</span>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-4 reveal">
+          <div class="card-soft">
+            <div class="img-placeholder" style="aspect-ratio:16/9"><i class="fas fa-image"></i> Service Image</div>
+            <div class="icon-box"><i class="fab fa-bitcoin"></i></div>
+            <h3 class="h5">Bitcoin Exchange</h3>
+            <p class="text-muted-2 small mb-0">Convert your BTC to Naira at competitive rates. We support all major
+              wallets and networks. Payouts processed within 10–15 minutes after confirmation.</p><span
+              class="pill">Available</span>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-4 reveal">
+          <div class="card-soft">
+            <div class="img-placeholder" style="aspect-ratio:16/9"><i class="fas fa-image"></i> Service Image</div>
+            <div class="icon-box"><i class="fab fa-ethereum"></i></div>
+            <h3 class="h5">Ethereum & Altcoins</h3>
+            <p class="text-muted-2 small mb-0">Trade ETH, BNB, SOL, and other major altcoins. Tell us what you have,
+              we'll give you the rate and process instantly.</p><span class="pill">Available</span>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-4 reveal">
+          <div class="card-soft">
+            <div class="img-placeholder" style="aspect-ratio:16/9"><i class="fas fa-image"></i> Service Image</div>
+            <div class="icon-box"><i class="fas fa-crown"></i></div>
+            <h3 class="h5">VIP Bulk Trading</h3>
+            <p class="text-muted-2 small mb-0">Trading over $1,000 USDT? Get dedicated VIP rates, a personal trader, and
+              priority processing. Designed for high-volume traders.</p><span class="pill">$1,000+ Only</span>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-4 reveal">
+          <div class="card-soft">
+            <div class="img-placeholder" style="aspect-ratio:16/9"><i class="fas fa-image"></i> Service Image</div>
+            <div class="icon-box"><i class="fas fa-building"></i></div>
+            <h3 class="h5">Business Payments</h3>
+            <p class="text-muted-2 small mb-0">Pay suppliers, freelancers, or partners internationally using USDT. We
+              convert and settle in Naira on the receiving end — zero hassle.</p><span class="pill">B2B</span>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-4 reveal">
+          <div class="card-soft">
+            <div class="img-placeholder" style="aspect-ratio:16/9"><i class="fas fa-image"></i> Service Image</div>
+            <div class="icon-box"><i class="fas fa-headset"></i></div>
+            <h3 class="h5">24/7 Concierge Support</h3>
+            <p class="text-muted-2 small mb-0">Every customer gets real human support. No bots, no ticket queues. Reach
+              us via WhatsApp, Telegram, or email anytime — day or night.</p><span class="pill">Always On</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CALCULATOR -->
+  <section id="calculator" class="section bg-surface-2">
+    <div class="container">
+      <div class="reveal">
+        <div class="section-tag">Live Calculator</div>
+        <h2 class="section-title">See Exactly What<br>You'll <span class="text-grad">Receive</span></h2>
+        <p class="section-sub">Type in your USDT amount and instantly see how much Naira hits your account — no hidden
+          fees.</p>
+      </div>
+      <div class="row g-4 mt-3 align-items-center">
+        <div class="col-lg-6 reveal">
+          <div class="calc-card">
+            <div class="rate-label mb-2">You Send</div>
+            <div class="calc-input-wrap">
+              <span class="calc-currency">$</span>
+              <input class="calc-input" type="number" id="usdtInput" placeholder="100" min="20" value="100"
+                oninput="calculate()" />
+            </div>
+            <div class="calc-arrow"><i class="fas fa-arrow-down"></i></div>
+            <div class="rate-label mb-2">You Receive</div>
+            <div class="calc-result" id="nairaOutput">₦164,000</div>
+            <div class="calc-info">
+              <div class="calc-info-item"><span>Rate</span><strong>₦1,640/USDT</strong></div>
+              <div class="calc-info-item"><span>Fee</span><strong>Zero</strong></div>
+              <div class="calc-info-item"><span>Time</span><strong>~5 mins</strong></div>
+            </div>
+            <a href="#contact" class="btn-brand mt-3 w-100 justify-content-center"><i class="fas fa-paper-plane"></i>
+              Start This Trade</a>
+          </div>
+        </div>
+        <div class="col-lg-6 reveal">
+          <div class="feat-row"><i class="fas fa-percent"></i>
+            <div>
+              <h4>Zero Hidden Fees</h4>
+              <p>What you see in the calculator is exactly what lands in your account. No service charge, no platform
+                fee — ever.</p>
+            </div>
+          </div>
+          <div class="feat-row"><i class="fas fa-sync"></i>
+            <div>
+              <h4>Rates Updated Every 5 Minutes</h4>
+              <p>Our rates are synced with global market prices every 5 minutes to ensure you always get fair value.</p>
+            </div>
+          </div>
+          <div class="feat-row"><i class="fas fa-university"></i>
+            <div>
+              <h4>All Nigerian Banks Supported</h4>
+              <p>Access Bank, GTBank, Zenith, First Bank, OPay, Palmpay, and all other major Nigerian banks and mobile
+                wallets.</p>
+            </div>
+          </div>
+          <div class="feat-row"><i class="fas fa-lock"></i>
+            <div>
+              <h4>Rate Lock Guarantee</h4>
+              <p>Once you initiate a transaction, your rate is locked for 15 minutes — giving you time to send USDT
+                without rate risk.</p>
+            </div>
+          </div>
+          <div class="feat-row"><i class="fas fa-trophy"></i>
+            <div>
+              <h4>VIP Rates for Big Trades</h4>
+              <p>Trade over $500 USDT? You automatically qualify for our VIP rate — often ₦5–20 above standard rate.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <section id="how" class="section">
+    <div class="container">
+      <div class="text-center reveal">
+        <div class="section-tag">How It Works</div>
+        <h2 class="section-title">Trade in <span class="text-grad">4 Simple Steps</span></h2>
+        <p class="section-sub mx-auto">No complicated forms, no lengthy verification. Start trading in minutes.</p>
+      </div>
+      <div class="row g-4 mt-4 steps reveal">
+        <div class="col-md-6 col-lg-3">
+          <div class="step">
+            <div class="step-num">1</div>
+            <h3>Get Your Rate</h3>
+            <p>Use our live calculator or contact us on WhatsApp to get today's confirmed rate for your trade amount.
+            </p>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-3">
+          <div class="step">
+            <div class="step-num">2</div>
+            <h3>Send Your USDT</h3>
+            <p>Transfer USDT to our provided wallet address. Share your transaction hash as proof of payment.</p>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-3">
+          <div class="step">
+            <div class="step-num">3</div>
+            <h3>We Confirm</h3>
+            <p>Our team verifies your transaction on the blockchain. This typically takes 1–3 minutes after network
+              confirmation.</p>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-3">
+          <div class="step">
+            <div class="step-num">4</div>
+            <h3>Receive Naira</h3>
+            <p>Your Naira is sent directly to your bank account or mobile wallet — usually within 5 minutes of
+              confirmation.</p>
+          </div>
+        </div>
+      </div>
+      <div class="text-center mt-5 reveal">
+        <a href="#contact" class="btn-brand" style="font-size:1.05rem;padding:16px 32px"><i class="fab fa-whatsapp"></i>
+          Start Trading on WhatsApp</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS -->
+  <section id="testimonials" class="section bg-surface-2">
+    <div class="container">
+      <div class="text-center reveal">
+        <div class="section-tag">Customer Reviews</div>
+        <h2 class="section-title">10,000+ Nigerians<br><span class="text-grad">Trust</span> Mr Coin</h2>
+        <p class="section-sub mx-auto">Don't take our word for it — hear directly from our customers.</p>
+      </div>
+      <div class="row g-4 mt-3">
+        <div class="col-md-6 col-lg-4 reveal">
+          <div class="testi-card">
+            <div class="stars">★★★★★</div>
+            <p>"Fastest exchange I've ever used. Sent 500 USDT, got my Naira in 4 minutes flat. The rate was better than
+              Binance P2P. I use Mr Coin for all my trades now."</p>
+            <div class="testi-author">
+              <div class="testi-avatar">AO</div>
+              <div>
+                <div class="testi-name">Adebola Okonkwo</div>
+                <div class="testi-meta">Lagos, Nigeria</div>
+                <div class="verified"><i class="fas fa-check-circle"></i> Verified Customer</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-4 reveal">
+          <div class="testi-card">
+            <div class="stars">★★★★★</div>
+            <p>"I was skeptical at first but my colleague convinced me to try. Did a $200 trade and got paid in 3
+              minutes. Mr Coin is legit! Now I recommend them to everyone in my crypto group."</p>
+            <div class="testi-author">
+              <div class="testi-avatar">CE</div>
+              <div>
+                <div class="testi-name">Chisom Ezurike</div>
+                <div class="testi-meta">Enugu, Nigeria</div>
+                <div class="verified"><i class="fas fa-check-circle"></i> Verified Customer</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-4 reveal">
+          <div class="testi-card">
+            <div class="stars">★★★★★</div>
+            <p>"I use Mr Coin for my bulk trades. As a freelancer receiving USDT from clients abroad, I need reliable
+              and fast conversion. Mr Coin has never disappointed in over 2 years."</p>
+            <div class="testi-author">
+              <div class="testi-avatar">KM</div>
+              <div>
+                <div class="testi-name">Kemi Morenikeji</div>
+                <div class="testi-meta">Abuja, Nigeria</div>
+                <div class="verified"><i class="fas fa-check-circle"></i> Verified Customer</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-4 reveal">
+          <div class="testi-card">
+            <div class="stars">★★★★★</div>
+            <p>"Best rates in Lagos, period. I've compared Mr Coin with at least 5 other vendors and they always beat or
+              match everyone else. Plus the WhatsApp support is super responsive."</p>
+            <div class="testi-author">
+              <div class="testi-avatar">TI</div>
+              <div>
+                <div class="testi-name">Taiwo Ibraheem</div>
+                <div class="testi-meta">Lagos Island, Nigeria</div>
+                <div class="verified"><i class="fas fa-check-circle"></i> Verified Customer</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-4 reveal">
+          <div class="testi-card">
+            <div class="stars">★★★★★</div>
+            <p>"I've traded over 10,000 USDT with Mr Coin and never had a single issue. Their VIP service is worth it —
+              dedicated trader, locked rates, and instant payments. Highly recommended."</p>
+            <div class="testi-author">
+              <div class="testi-avatar">BO</div>
+              <div>
+                <div class="testi-name">Babatunde Olawale</div>
+                <div class="testi-meta">Port Harcourt, Nigeria</div>
+                <div class="verified"><i class="fas fa-check-circle"></i> VIP Customer</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-4 reveal">
+          <div class="testi-card">
+            <div class="stars">★★★★★</div>
+            <p>"As someone new to crypto, Mr Coin made the whole thing easy. They walked me through everything on
+              WhatsApp, confirmed my transaction, and I received my money without stress."</p>
+            <div class="testi-author">
+              <div class="testi-avatar">FN</div>
+              <div>
+                <div class="testi-name">Fatima Nakande</div>
+                <div class="testi-meta">Kano, Nigeria</div>
+                <div class="verified"><i class="fas fa-check-circle"></i> Verified Customer</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECURITY -->
+  <section id="security" class="section">
+    <div class="container">
+      <div class="reveal">
+        <div class="section-tag">Security & Trust</div>
+        <h2 class="section-title">Your Money is<br><span class="text-grad">Always Safe</span> With Us</h2>
+        <p class="section-sub">We take security as seriously as you do. Every measure is in place to protect your
+          transactions and your funds.</p>
+      </div>
+      <div class="row g-4 mt-3 align-items-center">
+        <div class="col-lg-6 reveal">
+          <div class="sec-item">
+            <div class="sec-item-icon"><i class="fas fa-eye"></i></div>
+            <div>
+              <h4 class="h6 mb-1">Full Transaction Transparency</h4>
+              <p class="text-muted-2 small mb-0">Every transaction is traceable on the blockchain. You receive the
+                wallet address, verify the network, send, and share your hash — everything is verifiable.</p>
+            </div>
+          </div>
+          <div class="sec-item">
+            <div class="sec-item-icon"><i class="fas fa-user-check"></i></div>
+            <div>
+              <h4 class="h6 mb-1">Manual Verification by Real Humans</h4>
+              <p class="text-muted-2 small mb-0">Unlike bots, our traders personally verify every incoming transaction
+                before processing payment. No automated errors, no lost funds.</p>
+            </div>
+          </div>
+          <div class="sec-item">
+            <div class="sec-item-icon"><i class="fas fa-file-contract"></i></div>
+            <div>
+              <h4 class="h6 mb-1">Written Guarantees</h4>
+              <p class="text-muted-2 small mb-0">Before any large trade, we provide written transaction confirmations on
+                WhatsApp/Telegram that serve as proof of agreement. Your protection comes first.</p>
+            </div>
+          </div>
+          <div class="sec-item">
+            <div class="sec-item-icon"><i class="fas fa-history"></i></div>
+            <div>
+              <h4 class="h6 mb-1">5-Year Track Record</h4>
+              <p class="text-muted-2 small mb-0">We have been operating since 2020 with zero reported cases of fraud or
+                theft. Our reputation in the Nigerian crypto space speaks for itself.</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-6 reveal">
+          <div class="sec-visual">
+            <div class="img-placeholder" style="aspect-ratio:16/9"><i class="fas fa-image"></i> Security Image
+              Placeholder</div>
+            <div class="shield"><i class="fas fa-shield-alt"></i></div>
+            <div style="font-family:'Poppins';font-size:1.25rem;font-weight:800">Transaction Security</div>
+            <div class="text-muted-2 small mb-3">Every layer of protection activated</div>
+            <div class="sec-badge"><i class="fas fa-check-circle"></i> Blockchain-verified transactions</div>
+            <div class="sec-badge"><i class="fas fa-check-circle"></i> No personal data stored without consent</div>
+            <div class="sec-badge"><i class="fas fa-check-circle"></i> Encrypted communications on all channels</div>
+            <div class="sec-badge"><i class="fas fa-check-circle"></i> Rate-lock protection on all trades</div>
+            <div class="sec-badge"><i class="fas fa-check-circle"></i> 24/7 fraud monitoring</div>
+            <div class="sec-badge"><i class="fas fa-check-circle"></i> Full refund policy on failed transactions</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact" class="section bg-surface-2">
+    <div class="container">
+      <div class="text-center reveal">
+        <div class="section-tag">Contact & Support</div>
+        <h2 class="section-title">We're Always <span class="text-grad">Here</span> For You</h2>
+        <p class="section-sub mx-auto">Have a question, want to start a trade, or need help with a transaction? Reach us
+          instantly through any of these channels.</p>
+      </div>
+      <div class="row g-4 mt-3">
+        <div class="col-md-6 reveal">
+          <div class="contact-card">
+            <h3><i class="fab fa-whatsapp" style="color:#25D366"></i> WhatsApp Support</h3>
+            <p>The fastest way to trade with us. Message us your amount and bank details, and we'll handle the rest.
+              Available 7am – 12am daily.</p><a href="https://wa.me/2348000000000" class="btn-wa"><i
+                class="fab fa-whatsapp"></i> Chat on WhatsApp</a>
+          </div>
+        </div>
+        <div class="col-md-6 reveal">
+          <div class="contact-card">
+            <h3><i class="fab fa-telegram" style="color:#0088cc"></i> Telegram Channel</h3>
+            <p>Join our Telegram for live rate updates, announcements, and direct trade support. We post rate changes in
+              real-time.</p><a href="https://t.me/mrcoinng" class="btn-tg"><i class="fab fa-telegram"></i> Join
+              Telegram</a>
+          </div>
+        </div>
+        <div class="col-md-6 reveal">
+          <div class="contact-card">
+            <h3><i class="fas fa-envelope text-brand"></i> Email Support</h3>
+            <p>For formal trade enquiries, VIP account setup, or business partnerships. We respond to all emails within
+              2 hours during business hours.</p><a href="mailto:support@mrcoin.ng" class="btn-em"><i
+                class="fas fa-envelope"></i> Email Us</a>
+          </div>
+        </div>
+        <div class="col-md-6 reveal">
+          <div class="contact-card" style="background:var(--brand-dim);border-color:var(--brand)">
+            <h3 class="text-brand">⚡ VIP Trading Line</h3>
+            <p>Trading over $500 USDT? You get a dedicated VIP trader, priority queue, and the best rates we can offer.
+              Reach out to join the VIP list.</p><a
+              href="https://wa.me/2348000000000?text=I%20want%20to%20join%20VIP%20trading" class="btn-wa"><i
+                class="fas fa-crown"></i> Apply for VIP</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section id="faq" class="section">
+    <div class="container">
+      <div class="row g-5">
+        <div class="col-lg-5 reveal">
+          <div class="section-tag">FAQ</div>
+          <h2 class="section-title">Got <span class="text-grad">Questions?</span><br>We've Got Answers.</h2>
+          <p class="section-sub">Here are the most common questions from our customers. Still not sure? Reach us on
+            WhatsApp anytime.</p>
+          <a href="https://wa.me/2348000000000" class="btn-brand mt-3"><i class="fab fa-whatsapp"></i> Ask Us
+            Anything</a>
+        </div>
+        <div class="col-lg-7 reveal">
+          <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)"><span>How fast is payment after I send
+                USDT?</span><i class="fas fa-plus"></i></button>
+            <div class="faq-a">Payment is processed within 3–5 minutes of your USDT transaction getting 1 blockchain
+              confirmation. On TRC20 (TRON network), this is usually under 2 minutes. On ERC20 (Ethereum), it may take
+              5–10 minutes due to network speed. We process immediately after confirmation — no delays on our end.</div>
+          </div>
+          <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)"><span>What are the minimum and maximum
+                trade limits?</span><i class="fas fa-plus"></i></button>
+            <div class="faq-a">Minimum trade is $20 USDT. Maximum per single transaction is $50,000 USDT. For amounts
+              above $10,000, please contact us in advance so we can prepare liquidity. VIP customers can trade unlimited
+              amounts with prior arrangement.</div>
+          </div>
+          <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)"><span>What if my payment is delayed or
+                not received?</span><i class="fas fa-plus"></i></button>
+            <div class="faq-a">If payment is delayed beyond 15 minutes after blockchain confirmation, contact us
+              immediately on WhatsApp with your transaction hash. In rare cases of network congestion, it may take
+              longer. We never keep your money — if there's an issue, we resolve it or refund you in full.</div>
+          </div>
+          <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)"><span>Is it safe to trade with Mr
+                Coin?</span><i class="fas fa-plus"></i></button>
+            <div class="faq-a">Absolutely. We have been operating since 2020 with zero fraud cases. Every transaction is
+              blockchain-verified, manually processed by our trained team, and fully transparent. We also provide
+              written trade confirmations for large trades. Our 10,000+ satisfied customers are our best proof.</div>
+          </div>
+          <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)"><span>Which USDT network do you
+                support?</span><i class="fas fa-plus"></i></button>
+            <div class="faq-a">We support USDT on TRC20 (TRON) and ERC20 (Ethereum). We recommend TRC20 for faster and
+              cheaper transactions. Always confirm the correct network with us before sending — sending on the wrong
+              network can result in loss of funds.</div>
+          </div>
+          <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)"><span>Can I get a better rate for large
+                amounts?</span><i class="fas fa-plus"></i></button>
+            <div class="faq-a">Yes! Trades above $500 USDT automatically qualify for VIP rates, which are often ₦5–₦20
+              above our standard rate. The larger your trade, the better the rate. Contact us before initiating large
+              trades so we can give you our best offer.</div>
+          </div>
+          <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)"><span>Do you buy crypto (Naira to
+                USDT)?</span><i class="fas fa-plus"></i></button>
+            <div class="faq-a">Yes, we also offer Naira to USDT (buying crypto with Naira). Contact us on WhatsApp for
+              the current buy rate. Note that buy rates are slightly different from sell rates. Minimum purchase is
+              ₦50,000.</div>
+          </div>
+          <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)"><span>How do I know you won't disappear
+                with my USDT?</span><i class="fas fa-plus"></i></button>
+            <div class="faq-a">Fair question. We've built our reputation over 5 years. You can verify our track record
+              through customer testimonials, our active social media presence, and the thousands of satisfied customers
+              in various Nigerian crypto communities. We also encourage you to start small on your first trade to build
+              trust. We're here to stay.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="section bg-surface-2" style="padding:80px 0">
+    <div class="container">
+      <div class="cta-banner reveal">
+        <div class="section-tag">Ready to Trade?</div>
+        <h2>Get the Best Naira Rate <span class="text-grad">Right Now</span></h2>
+        <p>Join 10,000+ Nigerians who trust Mr Coin for fast, secure, and competitive USDT exchange.</p>
+        <div class="d-flex gap-2 justify-content-center flex-wrap">
+          <a href="https://wa.me/2348000000000" class="btn-brand"><i class="fab fa-whatsapp"></i> Trade on WhatsApp</a>
+          <a href="#calculator" class="btn-ghost"><i class="fas fa-calculator"></i> Calculate My Rate</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="container">
+      <div class="row g-4">
+        <div class="col-lg-5 col-md-12">
+          <div class="footer-logo">MR<span>COIN</span></div>
+          <p class="footer-desc">Nigeria's most trusted USDT-to-Naira exchange. Fast payouts, best rates, zero hassle.
+            Operating since 2020.</p>
+          <div>
+            <a href="#" class="footer-soc"><i class="fab fa-twitter"></i></a>
+            <a href="#" class="footer-soc"><i class="fab fa-instagram"></i></a>
+            <a href="#" class="footer-soc"><i class="fab fa-telegram"></i></a>
+            <a href="#" class="footer-soc"><i class="fab fa-whatsapp"></i></a>
+          </div>
+        </div>
+        <div class="col-lg-2 col-sm-4 footer-col">
+          <h4>Quick Links</h4>
+          <ul>
+            <li><a href="#home">Home</a></li>
+            <li><a href="#about">About Us</a></li>
+            <li><a href="#services">Services</a></li>
+            <li><a href="#calculator">Live Rates</a></li>
+            <li><a href="#how">How It Works</a></li>
+          </ul>
+        </div>
+        <div class="col-lg-2 col-sm-4 footer-col">
+          <h4>Services</h4>
+          <ul>
+            <li><a href="#services">USDT → Naira</a></li>
+            <li><a href="#services">Bitcoin Exchange</a></li>
+            <li><a href="#services">Ethereum Swap</a></li>
+            <li><a href="#services">VIP Trading</a></li>
+            <li><a href="#services">Business Payments</a></li>
+          </ul>
+        </div>
+        <div class="col-lg-3 col-sm-4 footer-col">
+          <h4>Support</h4>
+          <ul>
+            <li><a href="#faq">FAQ</a></li>
+            <li><a href="#contact">Contact Us</a></li>
+            <li><a href="#">Privacy Policy</a></li>
+            <li><a href="#">Terms of Service</a></li>
+            <li><a href="#">Security</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p class="mb-0">© 2025 Mr Coin Nigeria. All rights reserved. Exchange at your own risk.</p>
+        <div><a href="#">Privacy Policy</a><a href="#">Terms</a><a href="#">AML Policy</a></div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    window.addEventListener('load', () => setTimeout(() => document.getElementById('loader').classList.add('hidden'), 600));
+    window.addEventListener('scroll', () => document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 60));
+    document.getElementById('navToggle').addEventListener('click', () => document.getElementById('navLinks').classList.toggle('open'));
+    document.querySelectorAll('#navLinks a').forEach(a => a.addEventListener('click', () => document.getElementById('navLinks').classList.remove('open')));
+
+    const RATE = 1640;
+    function calculate() {
+      const v = parseFloat(document.getElementById('usdtInput').value) || 0;
+      document.getElementById('nairaOutput').textContent = '₦' + (v * RATE).toLocaleString('en-NG');
+    }
+    calculate();
+
+    function toggleFaq(btn) {
+      const a = btn.nextElementSibling;
+      const isOpen = a.classList.contains('open');
+      document.querySelectorAll('.faq-a').forEach(x => x.classList.remove('open'));
+      document.querySelectorAll('.faq-q').forEach(x => x.classList.remove('open'));
+      if (!isOpen) { a.classList.add('open'); btn.classList.add('open'); }
+    }
+
+    const io = new IntersectionObserver(entries => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); } });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+    let base = 1640;
+    setInterval(() => {
+      base += (Math.random() - 0.5) * 4;
+      const r = Math.round(base);
+      document.getElementById('liveRate').textContent = '₦' + r.toLocaleString();
+      document.getElementById('buyRate').textContent = '₦' + (r - 5).toLocaleString() + ' / USDT';
+      document.getElementById('sellRate').textContent = '₦' + r.toLocaleString() + ' / USDT';
+    }, 8000);
+  </script>
+</body>
+
+</html>
